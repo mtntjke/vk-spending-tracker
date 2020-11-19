@@ -1,5 +1,8 @@
 import React from 'react';
+import { PanelHeader } from '@vkontakte/vkui';
 
-export const HistoryPage = () => {
-  return <h1>History</h1>;
+const HistoryPage = () => {
+  return <PanelHeader>История</PanelHeader>;
 };
+
+export default HistoryPage;
