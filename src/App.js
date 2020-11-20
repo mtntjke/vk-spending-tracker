@@ -42,7 +42,7 @@ const App = () => {
 
   const pages = appRoutes.map((navItem) => (
     <View key={navItem.path} id={navItem.path} activePanel={navItem.path}>
-      <Panel id={navItem.path}>{navItem.page}</Panel>
+      <Panel id={navItem.path}>{navItem.component}</Panel>
     </View>
   ));
 

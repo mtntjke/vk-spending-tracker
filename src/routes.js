@@ -6,11 +6,11 @@ import HistoryPage from './pages/HistoryPage';
 import PlanningPage from './pages/PlanningPage';
 import SettingsPage from './pages/SettingsPage';
 
-import Icon28NewsfeedOutline from '@vkontakte/icons/dist/28/newsfeed_outline';
-import Icon28ServicesOutline from '@vkontakte/icons/dist/28/services_outline';
-import Icon28MessageOutline from '@vkontakte/icons/dist/28/message_outline';
-import Icon28ClipOutline from '@vkontakte/icons/dist/28/clip_outline';
-import Icon28UserCircleOutline from '@vkontakte/icons/dist/28/user_circle_outline';
+import Icon28MoneyTransferOutline from '@vkontakte/icons/dist/28/money_transfer_outline';
+import Icon28CoinsOutline from '@vkontakte/icons/dist/28/coins_outline';
+import Icon28HistoryBackwardOutline from '@vkontakte/icons/dist/28/history_backward_outline';
+import Icon28CalendarOutline from '@vkontakte/icons/dist/28/calendar_outline';
+import Icon28SettingsOutline from '@vkontakte/icons/dist/28/settings_outline';
 
 const ROUTES = {
   SPENDING: '/',
@@ -24,32 +24,32 @@ export const appRoutes = [
   {
     path: ROUTES.SPENDING,
     text: 'Расход',
-    icon: <Icon28NewsfeedOutline />,
-    page: <SpendingPage />,
+    icon: <Icon28MoneyTransferOutline />,
+    component: <SpendingPage />,
   },
   {
     path: ROUTES.INCOME,
     text: 'Доход',
-    icon: <Icon28ServicesOutline />,
-    page: <IncomePage />,
+    icon: <Icon28CoinsOutline />,
+    component: <IncomePage />,
   },
   {
     path: ROUTES.HISTORY,
     text: 'История',
-    icon: <Icon28MessageOutline />,
-    page: <HistoryPage />,
+    icon: <Icon28HistoryBackwardOutline />,
+    component: <HistoryPage />,
   },
   {
     path: ROUTES.PLANNING,
     text: 'Планирование',
-    icon: <Icon28ClipOutline />,
-    page: <PlanningPage />,
+    icon: <Icon28CalendarOutline />,
+    component: <PlanningPage />,
   },
   {
     path: ROUTES.SETTINGS,
     text: 'Настройки',
-    icon: <Icon28UserCircleOutline />,
-    page: <SettingsPage />,
+    icon: <Icon28SettingsOutline />,
+    component: <SettingsPage />,
   },
 ];
 
