@@ -1,21 +1,16 @@
-import React from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useContext } from 'react';
 import { Tabbar, TabbarItem } from '@vkontakte/vkui';
-import { appRoutes } from '../routes';
+import { mainStories } from '../routes';
+import { RouterContext } from './hoc/withRouter';
 
-const Navbar = ({ activeStory }) => {
-  const history = useHistory();
+const Navbar = () => {
+  const { activeStory, historyPush } = useContext(RouterContext);
 
-  const onStoryChange = (e) => {
-    history.push(e.currentTarget.dataset.story);
-  };
-
-  const tabbarItems = appRoutes.map((navItem) => (
+  const tabbarItems = mainStories.map((navItem) => (
     <TabbarItem
       key={navItem.path}
-      onClick={onStoryChange}
+      onClick={() => historyPush(navItem.path)}
       selected={activeStory === navItem.path}
-      data-story={navItem.path}
       text={navItem.text}
     >
       {navItem.icon}

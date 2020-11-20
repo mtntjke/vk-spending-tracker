@@ -20,7 +20,9 @@ const ROUTES = {
   SETTINGS: '/settings',
 };
 
-export const appRoutes = [
+export const defaultRoute = ROUTES.SPENDING;
+
+export const mainStories = [
   {
     path: ROUTES.SPENDING,
     text: 'Расход',

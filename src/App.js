@@ -1,46 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
-import bridge from '@vkontakte/vk-bridge';
+import React, { useContext } from 'react';
 import { Epic, View, Panel, ConfigProvider } from '@vkontakte/vkui';
 import Navbar from './components/Navbar';
-import withRouter from './components/hoc/withRouter';
-import { appRoutes } from './routes';
+import withRouter, { RouterContext } from './components/hoc/withRouter';
+import withScheme from './components/hoc/withScheme';
+import { mainStories } from './routes';
+import compose from './utils/compose';
 
 import '@vkontakte/vkui/dist/vkui.css';
 
-const App = () => {
-  const history = useHistory();
-  const location = useLocation();
-  const [activeStory, setActiveStory] = useState(location.pathname);
-  const [scheme, setScheme] = useState('bright_light');
+const App = ({ scheme }) => {
+  const { activeStory } = useContext(RouterContext);
 
-  useEffect(() => {
-    const unregisterHistoryListener = history.listen((e) => {
-      setActiveStory(e.pathname);
-    });
-
-    return () => {
-      unregisterHistoryListener();
-    };
-  }, [history]);
-
-  useEffect(() => {
-    const subscribeListener = ({ detail: { type, data } }) => {
-      if (type === 'VKWebAppUpdateConfig') {
-        const lights = ['bright_light', 'client_light'];
-        const isLight = lights.includes(data.scheme);
-        setScheme(isLight ? 'bright_light' : 'space_gray');
-      }
-    };
-
-    bridge.subscribe(subscribeListener);
-
-    return () => {
-      bridge.unsubscribe(subscribeListener);
-    };
-  }, []);
-
-  const pages = appRoutes.map((navItem) => (
+  const pages = mainStories.map((navItem) => (
     <View key={navItem.path} id={navItem.path} activePanel={navItem.path}>
       <Panel id={navItem.path}>{navItem.component}</Panel>
     </View>
@@ -48,14 +19,11 @@ const App = () => {
 
   return (
     <ConfigProvider scheme={scheme}>
-      <Epic
-        activeStory={activeStory}
-        tabbar={<Navbar activeStory={activeStory} />}
-      >
+      <Epic activeStory={activeStory} tabbar={<Navbar />}>
         {pages}
       </Epic>
     </ConfigProvider>
   );
 };
 
-export default withRouter(App);
+export default compose(withRouter(), withScheme())(App);
